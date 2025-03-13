@@ -64,3 +64,21 @@ def buscar_o_filtrar_informacion(diccionario):
         for libros in datos['libros']:
             if libros['genero'] == genero_input:
                 print(f"    - {libros['titulo']} está en la {datos['biblioteca']}")
+
+
+
+# Consulta 4: Buscar información relacionada
+def buscar_informacion_relacionada(diccionario):
+    print("Los autores son:")
+    for datos in diccionario:
+        for libros in datos['libros']:
+            print(f"    - {libros['autor']}")
+    autor_input = input("Introduce un autor: ")
+
+    print(f"Los libros de {autor_input} son:")
+    for datos in diccionario:
+        for libros in datos['libros']:
+            if libros['autor'] == autor_input:
+                print(f"    - {libros['titulo']}, que está en la {datos['biblioteca']} y han solicitado el prestamo de este libro:")
+                for prestamos in libros['prestamos']:
+                    print(f"        - {prestamos['usuario_id']} -> {prestamos['nombre_usuario']}")
