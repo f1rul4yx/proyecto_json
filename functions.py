@@ -63,7 +63,7 @@ def buscar_o_filtrar_informacion(diccionario):
     for datos in diccionario:
         for libros in datos['libros']:
             if libros['genero'] == genero_input:
-                print(f"    - {libros['titulo']} está en la {datos['biblioteca']}")
+                print(f"    - {libros['titulo']}, está en la {datos['biblioteca']}")
 
 
 
@@ -79,6 +79,30 @@ def buscar_informacion_relacionada(diccionario):
     for datos in diccionario:
         for libros in datos['libros']:
             if libros['autor'] == autor_input:
-                print(f"    - {libros['titulo']}, que está en la {datos['biblioteca']} y han solicitado el prestamo de este libro:")
+                print(f"    - {libros['titulo']}, está en la {datos['biblioteca']} y han solicitado el prestamo de este libro:")
                 for prestamos in libros['prestamos']:
                     print(f"        - {prestamos['usuario_id']} -> {prestamos['nombre_usuario']}")
+
+
+
+# Consulta 5: Ejercicio libre
+def ejercicio_libre(diccionario):
+    primer_anio_input = int(input("Introduce un año (YYYY): "))
+    segundo_anio_input = int(input("Introduce otro año (YYYY): "))
+    anio_menor = 0
+    anio_mayor = 0
+    if primer_anio_input < segundo_anio_input:
+        anio_menor = primer_anio_input
+        anio_mayor = segundo_anio_input
+    elif segundo_anio_input < primer_anio_input:
+        anio_menor = segundo_anio_input
+        anio_mayor = primer_anio_input
+
+    print(f"Los libros que estan entre el año {anio_menor} y el {anio_mayor} son:")
+    for datos in diccionario:
+        for libros in datos['libros']:
+            if libros['año_publicacion'] >= anio_menor and libros['año_publicacion'] <= anio_mayor:
+                prestamos_count = 0
+                for prestamos in libros['prestamos']:
+                    prestamos_count += 1
+                print(f"    - {libros['titulo']}, está en la {datos['biblioteca']} y ha tenido un total de {prestamos_count} prestamos")
