@@ -11,6 +11,20 @@ def leer_fichero(archivo):
 
 
 
+# Menu
+def menu():
+    print("""1. Listar información
+2. Contar información
+3. Buscar o filtrar información
+4. Buscar información relacionada
+5. Filtrar por rango de años
+0. Salir""")
+    opcion = int(input("Introduce una opción válida: "))
+
+    return opcion
+
+
+
 # Consulta 1: Listar información
 def listar_informacion(diccionario):
     print("Las bibliotecas disponibles son:")
