@@ -13,15 +13,20 @@ def leer_fichero(archivo):
 
 # Menu
 def menu():
-    print("""1. Listar información
-2. Contar información
-3. Buscar o filtrar información
-4. Buscar información relacionada
+    try:
+        print("""1. Listar libros
+2. Número total de libros
+3. Filtrar por género
+4. Filtrar por autor
 5. Filtrar por rango de años
 0. Salir""")
-    opcion = int(input("Introduce una opción válida: "))
+        opcion = int(input("Introduce una opción válida: "))
 
-    return opcion
+
+
+        return opcion
+    except ValueError:
+        print
 
 
 
@@ -101,22 +106,25 @@ def buscar_informacion_relacionada(diccionario):
 
 # Consulta 5: Ejercicio libre
 def ejercicio_libre(diccionario):
-    primer_anio_input = int(input("Introduce un año (YYYY): "))
-    segundo_anio_input = int(input("Introduce otro año (YYYY): "))
-    anio_menor = 0
-    anio_mayor = 0
-    if primer_anio_input < segundo_anio_input:
-        anio_menor = primer_anio_input
-        anio_mayor = segundo_anio_input
-    elif segundo_anio_input < primer_anio_input:
-        anio_menor = segundo_anio_input
-        anio_mayor = primer_anio_input
+    try:
+        primer_anio_input = int(input("Introduce un año (YYYY): "))
+        segundo_anio_input = int(input("Introduce otro año (YYYY): "))
+        anio_menor = 0
+        anio_mayor = 0
+        if primer_anio_input < segundo_anio_input:
+            anio_menor = primer_anio_input
+            anio_mayor = segundo_anio_input
+        elif segundo_anio_input < primer_anio_input:
+            anio_menor = segundo_anio_input
+            anio_mayor = primer_anio_input
 
-    print(f"Los libros que estan entre el año {anio_menor} y el {anio_mayor} son:")
-    for datos in diccionario:
-        for libros in datos['libros']:
-            if libros['año_publicacion'] >= anio_menor and libros['año_publicacion'] <= anio_mayor:
-                prestamos_count = 0
-                for prestamos in libros['prestamos']:
-                    prestamos_count += 1
-                print(f"    - {libros['titulo']}, está en la {datos['biblioteca']} y ha tenido un total de {prestamos_count} prestamos")
+        print(f"Los libros que estan entre el año {anio_menor} y el {anio_mayor} son:")
+        for datos in diccionario:
+            for libros in datos['libros']:
+                if libros['año_publicacion'] >= anio_menor and libros['año_publicacion'] <= anio_mayor:
+                    prestamos_count = 0
+                    for prestamos in libros['prestamos']:
+                        prestamos_count += 1
+                    print(f"    - {libros['titulo']}, está en la {datos['biblioteca']} y ha tenido un total de {prestamos_count} prestamos")
+    except ValueError:
+        print("El valor tiene que ser numérico!!!")
